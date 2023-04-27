@@ -1,15 +1,41 @@
 ---
+import Layout from "../layout/Layout.astro";
+import IcbDialog from "../components/IcbDialog.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="DrTeleport">
+  <div class="h-screen w-screen flex justify-center items-center">
+    <button
+      id="openDialogButton"
+      class="p-8 bg-purple-400 text-white rounded-md flex justify-center items-center"
+    >
+      Open dialog
+    </button>
+  </div>
+
+  <IcbDialog
+    activator="#openDialogButton"
+    activatorEvent="click"
+    deactivator="#closeDialogButton"
+    deactivatorEvent="click"
+  >
+    <div slot="header">
+      <h3 class="text-2xl font-medium">Lorem Ipsum</h3>
+    </div>
+    <div class="mt-4 text-sm text-gray-800">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the
+      1500s, when an unknown printer took a galley of type and scrambled it to
+      make a type specimen book.
+    </div>
+
+    <div slot="footer" class="mt-8 flex justify-end">
+      <button
+        id="closeDialogButton"
+        class="px-4 py-2 bg-purple-400 text-white rounded-md flex justify-center items-center"
+      >
+        Close dialog
+      </button>
+    </div>
+  </IcbDialog>
+</Layout>
