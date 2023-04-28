@@ -1,0 +1,107 @@
+---
+// this component is not finished yet
+---
+
+<icb-dashboard class="relative min-h-screen w-full flex" data-expanded>
+  <aside
+    data-target="icb-dashboard.sidebar"
+    class="w-80 fixed top-0 bottom-0 transition-all duration-500 border-r border-purple-200"
+  >
+    <slot name="sidebar" />
+  </aside>
+
+  <header
+    data-target="icb-dashboard.topbar"
+    class="fixed h-16 top-0 left-80 right-0 flex items-center px-4 bg-white transition-all duration-500 border-b border-purple-200"
+  >
+    <button
+      data-target="icb-dashboard.toggler"
+      data-action="click:icb-dashboard#toogleSidebar"
+      class="material-symbols-outlined h-8 w-8 text-white rounded bg-purple-400 grid content-center hover:bg-purple-600 transition-all duration-500"
+    >
+      arrow_back
+    </button>
+    <slot name="topbar" />
+  </header>
+
+  <main
+    data-target="icb-dashboard.content"
+    class="relative w-full ml-80 mt-16 transition-all duration-500"
+  >
+    <div
+      class="absolute top-4 left-4 rounded bg-purple-100 px-4 py-2 hidden items-center"
+    >
+      <span class="material-symbols-outlined text-purple-300">
+        priority_high</span
+      >
+      <span data-target="icb-dashboard.info"></span>
+    </div>
+    <slot />
+  </main>
+</icb-dashboard>
+
+<script>
+  import { attr, controller, target } from "@github/catalyst";
+
+  @controller
+  class IcbDashboardElement extends HTMLElement {
+    @target sidebar: HTMLElement;
+    @target topbar: HTMLElement;
+    @target content: HTMLElement;
+    @target toggler: HTMLElement;
+    @target info: HTMLElement;
+
+    @attr expanded = true;
+
+    connectedCallback() {
+      this.info.innerText = `Sidebar is ${this.expanded ? "open" : "close"}`;
+      this.info.parentElement?.classList.replace("hidden", "flex");
+    }
+
+    toogleSidebar() {
+      this.expanded = !this.expanded;
+
+      this.info.innerText = `Sidebar is ${this.expanded ? "open" : "close"}`;
+    }
+  }
+</script>
+
+<style lang="scss">
+  .material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  }
+
+  /* using data attributes makes it a lot easier to customize the children */
+  icb-dashboard {
+    &[data-expanded] {
+      > aside {
+        @apply left-0;
+      }
+
+      > header {
+        @apply left-80;
+      }
+
+      > main {
+        @apply ml-80;
+      }
+    }
+
+    &:not([data-expanded]) {
+      > aside {
+        @apply -left-80;
+      }
+
+      > header {
+        @apply left-0;
+        > [data-target="icb-dashboard.toggler"] {
+          @apply rotate-180;
+        }
+      }
+
+      > main {
+        @apply ml-0;
+      }
+    }
+  }
+</style>

@@ -1,4 +1,6 @@
 ---
+import IcbDashboard from "../components/IcbDashboard.astro";
+
 type Props = {
   title: string;
 };
@@ -12,9 +14,23 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
     <title>{title}</title>
   </head>
   <body>
-    <slot />
+    <IcbDashboard>
+      <ul slot="sidebar">
+        <li>Foo</li>
+        <li>Bar</li>
+        <li>Baz</li>
+      </ul>
+
+      <slot />
+    </IcbDashboard>
   </body>
 </html>
