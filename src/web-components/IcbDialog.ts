@@ -2,8 +2,7 @@ import { attr, controller, target } from "@github/catalyst";
 
 @controller
 class IcbDialogElement extends HTMLElement {
-  @target overlay: HTMLElement;
-  @target dialog: HTMLElement;
+  @target dialog: HTMLDialogElement;
 
   @attr activator = "";
   @attr activatorEvent = "click";
@@ -25,9 +24,10 @@ class IcbDialogElement extends HTMLElement {
       signal,
     });
 
+    this.dialog.addEventListener("close", this, { signal });
+    this.dialog.addEventListener("click", this, { signal });
+
     // TODO: add transition effect when showing or hiding the dialog
-    // TODO: trap the focus inside the content when the dialog is open
-    // TODO: enable disposing the dialog with the keyboard
   }
 
   disconnectedCallback() {
@@ -38,13 +38,26 @@ class IcbDialogElement extends HTMLElement {
     // `handleEvent` will be called when each one of the event listeners
     // defined in `connectedCallback` is dispatched.
 
-    // we are only listening to two elements so or it's the activator or the
-    // deactivator
+    if (ev.target === this.dialog) {
+      switch (ev.type) {
+        case "close":
+        case "click":
+          this.dispose();
+          break;
+        default:
+          break;
+      }
+      return;
+    }
+
     if (ev.target === this.#deactivatorTarget) {
       this.dispose();
-    } else {
-      this.show = true;
+      return;
     }
+
+    this.dialog.showModal();
+    this.show = true;
+    this.focus();
   }
 
   attributeChangedCallback() {
@@ -57,12 +70,11 @@ class IcbDialogElement extends HTMLElement {
   }
 
   dispose() {
+    this.dialog.close();
     this.show = false;
   }
 
-  handleContentClick(ev: Event) {
-    // as the content is inside the overlay we must stop the click event from
-    // propagating since it can dispatch the dispose event
+  stopPropagation(ev: Event) {
     ev.stopPropagation();
   }
 }
