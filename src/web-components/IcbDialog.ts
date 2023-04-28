@@ -5,9 +5,11 @@ class IcbDialogElement extends HTMLElement {
   @target dialog: HTMLDialogElement;
 
   @attr activator = "";
-  @attr activatorEvent = "click";
   @attr deactivator = "";
+
+  @attr activatorEvent = "click";
   @attr deactivatorEvent = "click";
+
   @attr show = false;
 
   #eventAbortController: AbortController | null = null;
