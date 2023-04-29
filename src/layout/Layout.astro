@@ -20,15 +20,40 @@ const { title } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
 
+    <link rel="stylesheet" href="prism.css" />
+
     <title>{title}</title>
   </head>
   <body>
     <IcbDashboard>
-      <ul slot="sidebar">
-        <li>Foo</li>
-        <li>Bar</li>
-        <li>Baz</li>
-      </ul>
+      <div slot="sidebar" class="flex flex-col gap-1 p-8">
+        <a href="/">
+          <h3 class="block bg-purple-100 text-center p-4 rounded-md">
+            Astro Catalyst
+          </h3>
+        </a>
+
+        <a
+          class="rounded-md cursor-pointer hover:bg-purple-50 px-8 py-3"
+          href="/dialog"
+        >
+          Dialog
+        </a>
+
+        <a
+          class="rounded-md cursor-pointer hover:bg-purple-50 px-8 py-3"
+          href="/focus-trap"
+        >
+          Focus Trap
+        </a>
+
+        <a
+          class="rounded-md cursor-pointer hover:bg-purple-50 px-8 py-3"
+          href="/tab-view"
+        >
+          Tab View
+        </a>
+      </div>
 
       <slot />
     </IcbDashboard>

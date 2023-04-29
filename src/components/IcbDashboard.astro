@@ -12,7 +12,7 @@
 
   <header
     data-target="icb-dashboard.topbar"
-    class="fixed h-16 top-0 left-80 right-0 flex items-center px-4 bg-white transition-all duration-500 border-b border-purple-200"
+    class="fixed h-16 top-0 left-80 right-0 flex items-center px-4 bg-white transition-all duration-500 border-b border-purple-200 z-20"
   >
     <button
       data-target="icb-dashboard.toggler"
@@ -26,16 +26,16 @@
 
   <main
     data-target="icb-dashboard.content"
-    class="relative w-full ml-80 mt-16 transition-all duration-500"
+    class="relative w-full ml-80 mt-16 transition-all duration-500 p-8 z-10 max-w-screen-xl"
   >
-    <div
+    <!-- <div
       class="absolute top-4 left-4 rounded bg-purple-100 px-4 py-2 hidden items-center"
     >
       <span class="material-symbols-outlined text-purple-300">
         priority_high</span
       >
       <span data-target="icb-dashboard.info"></span>
-    </div>
+    </div> -->
     <slot />
   </main>
 </icb-dashboard>

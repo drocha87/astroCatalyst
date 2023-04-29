@@ -11,13 +11,13 @@ class IcbDashboardElement extends HTMLElement {
   @attr expanded = true;
 
   connectedCallback() {
-    this.info.innerText = `Sidebar is ${this.expanded ? "open" : "close"}`;
-    this.info.parentElement?.classList.replace("hidden", "flex");
+    // this.info.innerText = `Sidebar is ${this.expanded ? "open" : "close"}`;
+    // this.info.parentElement?.classList.replace("hidden", "flex");
   }
 
   toogleSidebar() {
     this.expanded = !this.expanded;
 
-    this.info.innerText = `Sidebar is ${this.expanded ? "open" : "close"}`;
+    // this.info.innerText = `Sidebar is ${this.expanded ? "open" : "close"}`;
   }
 }

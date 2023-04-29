@@ -14,7 +14,6 @@ class IcbFocusTrapElement extends HTMLElement {
       this.querySelectorAll<HTMLElement>(this.#selector)
     );
     this.addEventListener("keydown", this.handleFocus);
-    console.log(this);
   }
 
   handleFocus(ev: KeyboardEvent) {

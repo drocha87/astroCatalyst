@@ -2,58 +2,65 @@
 import Layout from "../layout/Layout.astro";
 import IcbDialog from "../components/IcbDialog.astro";
 import IcbFocusTrap from "../components/IcbFocusTrap.astro";
+import IcbTabView from "../components/IcbTabView.astro";
+import IcbTabPanel from "../components/IcbTabPanel.astro";
+
+import { Content as Diego } from "../../README.md";
+import { Prism } from "@astrojs/prism";
 ---
 
 <Layout title="DrTeleport">
-  <div class="flex flex-col justify-center h-full items-center">
-    <div>
-      <button
-        id="openDialogButton"
-        class="p-8 bg-purple-400 text-white rounded-md flex justify-center items-center"
-      >
-        Open dialog
-      </button>
-    </div>
+  <h1 class="text-4xl">Astro with Catalyst</h1>
 
-    <div class="mt-8 border p-8 rounded-2xl">
-      <h3>Focus Trap</h3>
-      <p class="mb-4">
-        This demo will show how the focus trap works. Try clicking here and
-        pressing tab or shift + tab.
-      </p>
-      <IcbFocusTrap>
-        <button id="button-one" class="border p-2">One</button>
-        <button id="button-two" class="border p-2">Two</button>
-        <button id="button-three" class="border p-2">Three</button>
-        <button id="button-four" class="border p-2">Four</button>
-        <button id="button-five" class="border p-2">Five</button>
-      </IcbFocusTrap>
-    </div>
-  </div>
+  <p class="my-8">
+    This project is a experimentation on using
+    <b><a href="https://catalyst.rocks/guide/introduction/">Catalyst</a></b>
+    together with <b><a href="https://astro.build/">astrojs</a></b>.
+  </p>
 
-  <IcbDialog
-    activator="#openDialogButton"
-    activatorEvent="click"
-    deactivator="#closeDialogButton"
-    deactivatorEvent="click"
-  >
-    <div slot="header">
-      <h3 class="text-2xl font-medium">Lorem Ipsum</h3>
-    </div>
-    <div class="mt-4 text-sm text-gray-800">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the
-      1500s, when an unknown printer took a galley of type and scrambled it to
-      make a type specimen book.
-    </div>
+  <p class="mb-8">
+    These are the steps necessary to integrate catalyst with astro.
+  </p>
 
-    <div slot="footer" class="mt-8 flex justify-end">
-      <button
-        id="closeDialogButton"
-        class="px-4 py-2 bg-purple-400 text-white rounded-md flex justify-center items-center"
-      >
-        Close dialog
-      </button>
-    </div>
-  </IcbDialog>
+  <Prism lang="sh" code={`npm install @github/catalyst`} />
+
+  <p class="my-8">
+    After adding the catalyst to your project you need to configure typescript
+    so it enables using decorators. In your `tsconfig.json` add the properties
+    to `compilerOptions`
+  </p>
+
+  <Prism
+    lang="json"
+    code={`
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "target": "ES2020",
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "sourceMap": true,
+    "experimentalDecorators": true
+  }
+}
+`}
+  />
+
+  <p class="my-8">
+    And configure the build system to keep the class names as it is mandatory to
+    catalyst, adding this vite configuration to <b>defineConfig</b> in
+    <b>astro.config.mjs</b>
+  </p>
+
+  <Prism
+    lang="js"
+    code={`
+vite: {
+  esbuild: {
+    minifyIdentifiers: false,
+  },
+}
+`}
+  />
 </Layout>

@@ -1,0 +1,38 @@
+---
+import Layout from "../layout/Layout.astro";
+import IcbFocusTrap from "../components/IcbFocusTrap.astro";
+import { Prism } from "@astrojs/prism";
+
+const sample = `
+<IcbFocusTrap>
+  <button id="button-one" class="border p-2">One</button>
+  <button id="button-two" class="border p-2">Two</button>
+  <button id="button-three" class="border p-2">Three</button>
+  <button id="button-four" class="border p-2">Four</button>
+  <button id="button-five" class="border p-2">Five</button>
+</IcbFocusTrap>
+`;
+---
+
+<Layout title="DrTeleport">
+  <div class="mt-8 border p-8 rounded-2xl">
+    <h3 class="text-xl">Focus Trap</h3>
+    <p class="mb-4 mt-2">
+      This demo will show how the focus trap works. Try clicking here and
+      pressing tab or shift + tab.
+    </p>
+    <IcbFocusTrap>
+      <button id="button-one" class="border p-2">One</button>
+      <button id="button-two" class="border p-2">Two</button>
+      <button id="button-three" class="border p-2">Three</button>
+      <button id="button-four" class="border p-2">Four</button>
+      <button id="button-five" class="border p-2">Five</button>
+    </IcbFocusTrap>
+  </div>
+
+  <h3 class="mt-8">Usage:</h3>
+
+  <pre class="mt-4 rounded-2xl">
+    <Prism lang="html" code={sample} />
+  </pre>
+</Layout>
