@@ -1,0 +1,23 @@
+---
+---
+
+<icb-tab-view>
+  <div class="rounded-2xl border p-8">
+    <div data-target="icb-tab-view.headers" class="flex gap-[2px]"></div>
+
+    <div data-target="icb-tab-view.content" class="mt-2">
+      <slot />
+    </div>
+  </div>
+</icb-tab-view>
+
+<script src="../web-components/IcbTabView.ts"></script>
+
+<style lang="scss" is:global>
+  .icb-tab-view__header {
+    @apply py-2 px-3 rounded-t-md cursor-pointer bg-gray-100 select-none;
+  }
+  .icb-tab-view__header-active {
+    @apply border-b-2 border-b-purple-500 bg-white border;
+  }
+</style>

@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"section"> & {
+  header: string;
+};
+
+const { header } = Astro.props;
+---
+
+<section data-targets="icb-tab-view.panels" data-header={header} class="hidden">
+  <slot />
+</section>
